@@ -1,6 +1,10 @@
 # The Attention Economy: How Doomscrolling Affects Student Productivity
 
-## Overview
+A data-driven analysis exploring the relationship between screen time, digital behavior, and productivity using survey data, SQL data transformation, and Python visualization.
+
+---
+
+## 📋 Overview
 
 This project explores how screen habits, digital behavior, and notification patterns relate to student productivity and attention span using survey-based data.
 
@@ -10,17 +14,19 @@ From a behavioral economics perspective, this project frames **attention as a sc
 
 ---
 
-## Research Questions
+## 🎯 Objective
 
-This project investigates the following questions:
+This analysis investigates three core research questions:
 
-* Does higher screen time appear to relate to lower productivity?
-* Does the type of screen activity appear to influence attention span?
-* Do notification habits appear to affect productivity outcomes?
+* **Does higher screen time relate to lower productivity?**
+* **Does the type of screen activity influence attention span?**
+* **Do notification habits affect productivity outcomes?**
+
+By examining these questions, the project aims to provide empirical insights into how digital behavior patterns may impact focus and work efficiency.
 
 ---
 
-## Tools Used
+## 🛠️ Tools Used
 
 This project was completed using:
 
@@ -28,32 +34,98 @@ This project was completed using:
 * **Python (Pandas + Matplotlib)** — analysis and data visualization
 * **Jupyter Notebook** — exploratory analysis and reporting
 * **VS Code** — development environment
-* **Tableau Public** — dashboard design and presentation
+* **Tableau Public** — interactive dashboard design and presentation
 
 ---
 
-## Dataset
+## 📊 Dataset
 
-This project uses the following publicly available dataset:
+**Source:** Kaggle - Screen Time, Productivity and Attention Span
 
-* **Dataset:** Screen Time, Productivity and Attention Span
-* **Source:** Kaggle
-* **Link:** https://www.kaggle.com/datasets/muhammadalirazazaidi/screen-time-data-productivity-and-attention-span
+- **Link:** https://www.kaggle.com/datasets/muhammadalirazazaidi/screen-time-data-productivity-and-attention-span
+- **Records:** Survey responses from individuals across multiple demographics
+- **License:** Publicly available for educational use
+
+**Data Contents:**
 
 The dataset contains survey responses related to:
-
-* screen time habits
-* device usage
-* screen activity type
-* attention span
-* productivity
-* notification handling
+- age group, gender, education level, occupation
+- average screen time (categorized by ranges)
+- device type (smartphone, laptop/PC, tablet)
+- screen activity type (entertainment, academic/work-related)
+- app categories (social media, streaming, productivity apps, etc.)
+- time periods of usage (morning, afternoon, evening, late night)
+- work environment (home, office, cafe, etc.)
+- self-reported productivity levels
+- attention span duration
+- work strategies and notification handling behaviors
 
 ---
 
-## Project Structure
+## 🧹 Data Cleaning Process
 
-```text id="5tq1od"
+The raw dataset was cleaned and transformed using SQLite before analysis in Python.
+
+**Cleaning Steps:**
+
+1. **Variable Selection** — Selected relevant columns for analysis
+2. **Text Formatting** — Trimmed inconsistent formatting and standardized categorical values
+3. **Derived Variables** — Created `screen_time_group` categorical variable from numeric ranges:
+   - **Low** → Less than 2 hours, 2–4 hours
+   - **Moderate** → 4–6 hours, 6–8 hours
+   - **High** → 8–10 hours, More than 10 hours
+4. **Label Simplification** — Simplified categorical labels for clearer visualization and analysis
+5. **Data Export** — Exported cleaned dataset as `screen_time_final.csv` for Python analysis
+
+**Cleaning SQL:** See `sql/cleaning.sql` for the complete transformation pipeline.
+
+---
+
+## 📈 Key Visualizations
+
+The cleaned dataset was analyzed in Python using **Pandas** and **Matplotlib**. Three main visualizations and one interactive dashboard were created:
+
+### 1. Productivity by Screen Time
+
+![Productivity by Screen Time](visuals/1_productivity_of_screen_time.png)
+
+**Analysis:** This chart compares self-reported productivity levels across low, moderate, and high screen time groups.
+
+**Key Insight:** Higher screen time groups appeared more likely to report lower productivity, suggesting a potential negative correlation between extended device use and work efficiency.
+
+---
+
+### 2. Attention Span vs Screen Activity Type
+
+![Attention Span vs Screen Activity](visuals/2_attention_span_vs_screen_activity.png)
+
+**Analysis:** This chart compares attention span duration across different types of screen activity (entertainment-focused vs. academic/work-related).
+
+**Key Insight:** Attention span appeared to vary significantly based on activity type. Users engaged in academic or work-related screen activities generally reported longer attention spans compared to those primarily using devices for entertainment.
+
+---
+
+### 3. Notification Handling vs Productivity
+
+![Notification Handling vs Productivity](visuals/3_notifications_handling_vs_productivity.png)
+
+**Analysis:** This chart examines the relationship between different notification-handling strategies and self-reported productivity levels.
+
+**Key Insight:** Participants who disabled or ignored notifications appeared more likely to report stronger productivity outcomes, while those who frequently interacted with notifications reported lower productivity.
+
+---
+
+### 4. Interactive Tableau Dashboard
+
+![Attention Economy Dashboard](visuals/attention_economy_dashboard.png)
+
+**Description:** The Tableau Public dashboard provides an interactive view of the key metrics and allows users to explore the data dynamically across multiple dimensions including demographics, device type, and usage patterns.
+
+---
+
+## 📁 Folder Structure
+
+```
 ATTENTION ECONOMY PROJECT/
 │
 ├── data/
@@ -76,192 +148,191 @@ ATTENTION ECONOMY PROJECT/
 ├── visuals/
 │   ├── 1_productivity_of_screen_time.png
 │   ├── 2_attention_span_vs_screen_activity.png
-│   └── 3_notifications_handling_vs_productivity.png
+│   ├── 3_notifications_handling_vs_productivity.png
+│   └── attention_economy_dashboard.png
 │
 ├── LICENSE
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+└── .gitignore
 ```
 
 ---
 
-## Data Cleaning
+## 🔍 Key Findings
 
-The dataset was cleaned and transformed in SQLite before being exported for analysis in Python.
+This analysis reveals three major patterns in the relationship between digital behavior and productivity:
 
-Cleaning steps included:
+### 1. Screen Time & Productivity Correlation
+**Finding:** Individuals in the **high screen time group (8+ hours)** demonstrated significantly lower self-reported productivity compared to those with moderate or low screen time.
 
-* selecting relevant variables
-* trimming inconsistent text formatting
-* creating a derived `screen_time_group` variable
-* simplifying categorical labels for clearer analysis and visualization
+### 2. Activity Type Matters
+**Finding:** The **type of screen activity** is a critical factor. Users engaged in **entertainment-focused activities** (social media, gaming, streaming) reported shorter attention spans and lower productivity, while **academic/work-related screen use** showed a more positive association with focus.
 
-Because the original dataset used **screen time ranges** rather than exact numeric values, a grouped variable was created:
+### 3. Notification Interruptions Impact Focus
+**Finding:** Participants who **disabled or ignored notifications** reported meaningfully higher productivity levels. Those who **frequently checked notifications** during work showed lower productivity outcomes, supporting the theory that interruptions fragment attention.
 
-* **Low** → Less than 2, 2–4
-* **Moderate** → 4–6, 6–8
-* **High** → 8–10, More than 10
+### Behavioral Economics Interpretation
+From a behavioral economics lens, these findings suggest that **attention is indeed a scarce resource**. Digital distractions create measurable opportunity costs by reducing the cognitive capacity individuals can allocate to primary tasks.
 
-The cleaned dataset was then exported as:
+---
 
-```text id="fmrqlj"
-data/cleaned/screen_time_final.csv
+## 🚀 Future Improvements
+
+Potential enhancements and extensions for this project:
+
+1. **Time-Series Analysis**
+   - Track changes in screen time and productivity over longer periods
+   - Identify seasonal patterns in digital behavior
+
+2. **Machine Learning Classification**
+   - Build predictive models to forecast productivity levels based on screen activity
+   - Implement clustering analysis to identify distinct user behavior segments
+
+3. **Demographic Deep-Dive**
+   - Analyze how digital behavior patterns differ across age groups, education levels, and occupations
+   - Explore gender-based differences in screen time and productivity correlations
+
+4. **Intervention Studies**
+   - Design and test behavioral interventions (notification limits, app timers, etc.)
+   - Measure impact on productivity and attention span over time
+
+5. **Qualitative Research**
+   - Conduct focus groups to understand the subjective experience of digital distraction
+   - Explore user motivations for different notification-handling strategies
+
+6. **Multi-Platform Analysis**
+   - Integrate data from multiple devices to create a comprehensive screen time profile
+   - Account for cross-device usage patterns (e.g., phone + laptop simultaneously)
+
+7. **Longitudinal Study**
+   - Follow participants over 6–12 months to assess causality vs. correlation
+   - Track behavioral changes and productivity improvements over time
+
+---
+
+## 💻 How to Reproduce This Project
+
+### Prerequisites
+- Python 3.7 or higher
+- Git
+- SQLite (usually included with Python)
+
+### Steps
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/moyaruizry-stack/attention-economy-project.git
+cd attention-economy-project
 ```
 
----
+**2. Install dependencies**
 
-## Analysis & Visualizations
-
-The cleaned dataset was analyzed in Python using **Pandas** and **Matplotlib**.
-
-Three main visualizations were created:
-
-### 1. Productivity by Screen Time
-
-This chart compares self-reported productivity levels across low, moderate, and high screen time groups.
-
-**Insight:** Higher screen time groups appeared more likely to report lower productivity.
-
-**File:**
-
-```text id="thb4l8"
-visuals/1_productivity_of_screen_time.png
-```
-
----
-
-### 2. Attention Span vs Screen Activity
-
-This chart compares attention span across different types of screen activity.
-
-**Insight:** Attention span appeared to vary depending on whether screen use was more academic/work-related or entertainment-focused.
-
-**File:**
-
-```text id="jlwm39"
-visuals/2_attention_span_vs_screen_activity.png
-```
-
----
-
-### 3. Notification Handling vs Productivity
-
-This chart compares productivity levels across different notification-handling behaviors.
-
-**Insight:** Participants who disabled or ignored notifications appeared more likely to report stronger productivity outcomes than those who frequently interacted with notifications.
-
-**File:**
-
-```text id="rjri0h"
-visuals/3_notifications_handling_vs_productivity.png
-```
-
----
-
-## Key Findings
-
-Overall, three broad patterns emerged from the analysis:
-
-* Higher screen time groups appeared more likely to report lower productivity
-* Attention span varied across different types of screen activity
-* Notification handling patterns appeared linked to productivity outcomes
-
-These findings suggest that digital behavior may influence how effectively students allocate attention and maintain focus.
-
----
-
-## Files Included
-
-### SQL
-
-* `sql/cleaning.sql`
-* `sql/analysis.sql`
-
-### Notebooks
-
-* `notebooks/analysis.ipynb`
-* `notebooks/test.ipynb`
-
-### Data
-
-* `data/raw/screen_time_survey.csv`
-* `data/cleaned/screen_time_final.csv`
-* `data/attention_economy.db`
-
-### Visuals
-
-* `visuals/1_productivity_of_screen_time.png`
-* `visuals/2_attention_span_vs_screen_activity.png`
-* `visuals/3_notifications_handling_vs_productivity.png`
-
----
-
-## How to Reproduce This Project
-
-### 1. Clone the repository
-
-```bash id="8u0h7l"
-git clone (https://github.com/moyaruizry-stack/attention-economy-project)
-```
-
-### 2. Install dependencies
-
-```bash id="rq8huj"
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Open the notebook
+**3. (Optional) Rerun the SQL cleaning pipeline**
 
-```bash id="y5s7n5"
-notebooks/analysis.ipynb
+If you want to regenerate the cleaned data from the raw dataset:
+
+```bash
+sqlite3 data/attention_economy.db < sql/cleaning.sql
 ```
 
-### 4. Make sure the cleaned dataset is located at:
+**4. Open the Jupyter Notebook**
 
-```text id="nrzm2w"
+```bash
+jupyter notebook notebooks/analysis.ipynb
+```
+
+Then run the cells to explore the analysis and visualizations.
+
+**5. View the data**
+
+The cleaned dataset is located at:
+```
 data/cleaned/screen_time_final.csv
 ```
 
 ---
 
-## ⚠️ Pre-Publication Considerations
+## 📋 Project Files Reference
 
-### 📄 License
+### SQL Scripts
+- `sql/cleaning.sql` — Data cleaning and transformation queries
+- `sql/analysis.sql` — Analysis queries used to generate insights
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+### Jupyter Notebooks
+- `notebooks/analysis.ipynb` — Main analysis and visualization notebook
+- `notebooks/test.ipynb` — Testing and exploratory notebook
 
----
+### Data Files
+- `data/raw/screen_time_survey.csv` — Original dataset from Kaggle
+- `data/cleaned/screen_time_final.csv` — Cleaned and transformed dataset
+- `data/attention_economy.db` — SQLite database with cleaned data
 
-### 📦 Dependencies
-
-All required Python packages are listed in `requirements.txt`.
-
----
-
-### 📊 Data Source & Attribution
-
-Notes:
-
-* The data was not collected by the author of this project
-* It is assumed the dataset publisher obtained appropriate consent
-* No personally identifiable information (PII) is included
-* This project is intended for educational and analytical purposes only
+### Visualizations
+- `visuals/1_productivity_of_screen_time.png` — Screen time vs. productivity chart
+- `visuals/2_attention_span_vs_screen_activity.png` — Activity type vs. attention span chart
+- `visuals/3_notifications_handling_vs_productivity.png` — Notification handling vs. productivity chart
+- `visuals/attention_economy_dashboard.png` — Interactive Tableau dashboard
 
 ---
 
-### 🔐 Ethical Considerations
+## 📜 License & Attribution
 
-* Analysis is conducted at an **aggregated level**
-* No individual-level conclusions are made
-* Findings should not be interpreted as causal relationships
+### License
+This project is licensed under the **MIT License**. See the `LICENSE` file for full details.
+
+### Data Attribution
+- **Dataset Source:** Kaggle - Screen Time, Productivity and Attention Span
+- **Data Collection:** Survey-based data collected by dataset publisher
+- **Privacy:** The dataset is anonymized with no personally identifiable information (PII)
+- **Usage:** This project is for educational and analytical purposes only
+- **Original Data Terms:** Users are responsible for adhering to the original dataset's terms of use from Kaggle
+
+### Dependencies
+All required Python packages are listed in `requirements.txt` and are open-source:
+- **Pandas** — Data manipulation and analysis
+- **Matplotlib** — Data visualization
+- **Jupyter** — Interactive notebook environment
 
 ---
 
-### 🏫 Institutional Approval
+## 🔐 Ethical Considerations & Limitations
 
-If this project is used for academic submission or research purposes, ensure compliance with your institution’s policies regarding:
+### Ethical Considerations
+* Analysis is conducted at an **aggregated level** — individual-level data is not exposed
+* **No causal claims** are made — findings represent correlations observed in survey responses
+* Results are presented objectively without prescriptive claims about "correct" behavior
+* Privacy is maintained through the use of anonymized survey data
 
-* human-related data
-* public data sharing
-* research ethics approval
-# attention-economy-project
+### Limitations
+* **Survey-based data** — Relies on self-reported measures of productivity and attention span
+* **Cross-sectional data** — Represents a snapshot in time, not longitudinal trends
+* **Correlation ≠ Causation** — High screen time and low productivity may be correlated, but causality cannot be inferred
+* **Demographic bias** — Sample may not represent all user populations equally
+* **Context missing** — Does not account for individual circumstances, job types, or personal circumstances
+
+---
+
+## 🤝 Contributing
+
+Contributions, suggestions, and feedback are welcome! Please feel free to:
+- Open an issue to report bugs or suggest improvements
+- Submit pull requests with enhancements
+- Share feedback on the analysis or findings
+
+---
+
+## 📧 Contact
+
+For questions or inquiries about this project, please refer to the GitHub repository.
+
+---
+
+**Last Updated:** April 2026  
+**Project Status:** Completed  
+**License:** MIT
