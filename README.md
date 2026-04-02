@@ -201,7 +201,7 @@ These findings suggest that digital behavior may influence how effectively stude
 ### 1. Clone the repository
 
 ```bash id="8u0h7l"
-git clone (https://github.com/moyaruizry-stack/attention-economy-project?tab=readme-ov-file)
+git clone (https://github.com/moyaruizry-stack/attention-economy-project)
 ```
 
 ### 2. Install dependencies
